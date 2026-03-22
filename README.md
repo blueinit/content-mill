@@ -1,5 +1,8 @@
 # content-mill
 
+[![npm version](https://img.shields.io/npm/v/@centrali-io/content-mill.svg)](https://www.npmjs.com/package/@centrali-io/content-mill)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 Index static content sources into [Meilisearch](https://www.meilisearch.com/) with a configurable document shape. You define what goes in — content-mill handles extraction, transformation, and atomic indexing.
 
 ## Why?
@@ -14,9 +17,9 @@ Meilisearch is great for search, but there's no lightweight way to index static 
 ## Install
 
 ```bash
-npm install content-mill
+npm install @centrali-io/content-mill
 # or globally
-npm install -g content-mill
+npm install -g @centrali-io/content-mill
 ```
 
 ## Quick Start
@@ -54,10 +57,10 @@ sources:
 
 ```bash
 # Preview what documents would be indexed
-MEILI_MASTER_KEY=your-key npx content-mill index --config content-mill.yml --dry-run
+MEILI_MASTER_KEY=your-key npx @centrali-io/content-mill index --config content-mill.yml --dry-run
 
 # Index for real
-MEILI_MASTER_KEY=your-key npx content-mill index --config content-mill.yml
+MEILI_MASTER_KEY=your-key npx @centrali-io/content-mill index --config content-mill.yml
 ```
 
 ## CLI Usage
@@ -375,10 +378,10 @@ sources:
 
 ```bash
 # Index everything
-npx content-mill index --config content-mill.yml
+npx @centrali-io/content-mill index --config content-mill.yml
 
 # Index only docs
-npx content-mill index --config content-mill.yml --source docs
+npx @centrali-io/content-mill index --config content-mill.yml --source docs
 ```
 
 ## Template Variables
@@ -480,7 +483,7 @@ Add to your release pipeline:
 - name: Index docs in Meilisearch
   env:
     MEILI_MASTER_KEY: ${{ secrets.MEILI_MASTER_KEY }}
-  run: npx content-mill index --config content-mill.yml
+  run: npx @centrali-io/content-mill index --config content-mill.yml
 ```
 
 ## Config Reference
