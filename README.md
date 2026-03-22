@@ -518,6 +518,13 @@ sources:
       displayedAttributes: [string]       # Optional
 ```
 
+## Support
+
+For questions, bugs, or feature requests:
+
+- Open an issue on [GitHub](https://github.com/blueinit/content-mill/issues)
+- Email [support@centrali.io](mailto:support@centrali.io)
+
 ## License
 
 MIT
