@@ -1,5 +1,5 @@
 {
-  "name": "content-mill",
+  "name": "@centrali-io/content-mill",
   "version": "0.1.0",
   "description": "Index static content sources (MkDocs, markdown directories) into Meilisearch with a configurable document shape.",
   "type": "module",
@@ -7,6 +7,13 @@
   "types": "dist/index.d.ts",
   "bin": {
     "content-mill": "dist/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blueinit/content-mill.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc",
