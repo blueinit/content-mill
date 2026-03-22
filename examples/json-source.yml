@@ -1,0 +1,27 @@
+# Index a JSON file or directory of JSON files into Meilisearch.
+# Useful for structured data like product catalogs, feature lists, or API endpoints.
+#
+# Usage:
+#   MEILI_MASTER_KEY=your-key npx content-mill index --config examples/json-source.yml --dry-run
+
+meili:
+  host: http://localhost:7700
+  apiKey: ${MEILI_MASTER_KEY}
+
+sources:
+  - name: products
+    type: json
+    path: ./data/products.json   # single file (array of objects) or directory of .json files
+    index: products
+    document:
+      primaryKey: id
+      fields:
+        id: "{{ id }}"
+        title: "{{ title }}"
+        content: "{{ description }}"
+        category: "{{ category }}"
+        price: "{{ price }}"
+        url: "/products/{{ id }}"
+      searchableAttributes: [title, content]
+      filterableAttributes: [category]
+      sortableAttributes: [title, price]

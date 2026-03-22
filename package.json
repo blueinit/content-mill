@@ -1,0 +1,38 @@
+{
+  "name": "content-mill",
+  "version": "0.1.0",
+  "description": "Index static content sources (MkDocs, markdown directories) into Meilisearch with a configurable document shape.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "content-mill": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/cli.js",
+    "test": "node --import tsx --test test/*.test.ts"
+  },
+  "keywords": [
+    "meilisearch",
+    "mkdocs",
+    "search",
+    "indexer",
+    "documentation",
+    "static-content"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^13.1.0",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "meilisearch": "^0.48.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.15.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
+  }
+}

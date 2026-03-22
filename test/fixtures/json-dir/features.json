@@ -1,0 +1,14 @@
+[
+  {
+    "id": "collections",
+    "title": "Collections",
+    "description": "Flexible data structures for any content type",
+    "category": "data"
+  },
+  {
+    "id": "compute",
+    "title": "Compute",
+    "description": "Serverless functions in sandboxed environments",
+    "category": "platform"
+  }
+]

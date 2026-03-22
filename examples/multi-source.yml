@@ -1,0 +1,65 @@
+# Index multiple content sources into the same Meilisearch index.
+# All sources targeting the same index are merged before a single atomic swap.
+#
+# Usage:
+#   MEILI_MASTER_KEY=your-key npx content-mill index --config examples/multi-source.yml --dry-run
+
+meili:
+  host: http://localhost:7700
+  apiKey: ${MEILI_MASTER_KEY}
+
+sources:
+  # Documentation site (MkDocs)
+  - name: docs
+    type: mkdocs
+    config: ./mkdocs.yml
+    index: content                # all sources share the same index
+    chunking:
+      strategy: heading
+      level: 2
+    document:
+      primaryKey: id
+      fields:
+        id: "doc-{{ slug }}-{{ chunk_index }}"
+        title: "{{ chunk_heading }}"
+        content: "{{ chunk_body }}"
+        section: "{{ nav_section }}"
+        url: "https://docs.example.com{{ path }}#{{ chunk_heading | slugify }}"
+        type: "docs"
+      searchableAttributes: [title, content]
+      filterableAttributes: [section, type]
+
+  # Changelog (markdown directory)
+  - name: changelog
+    type: markdown-dir
+    path: ./changelog/
+    index: content                # same index as docs
+    document:
+      primaryKey: id
+      fields:
+        id: "changelog-{{ slug }}"
+        title: "{{ heading }}"
+        content: "{{ body }}"
+        section: "Changelog"
+        url: "/changelog/{{ slug }}"
+        version: "{{ frontmatter.version }}"
+        type: "changelog"
+      searchableAttributes: [title, content]
+      filterableAttributes: [section, type, version]
+
+  # Feature catalog (JSON)
+  - name: features
+    type: json
+    path: ./data/features.json
+    index: content                # same index as docs
+    document:
+      primaryKey: id
+      fields:
+        id: "feature-{{ id }}"
+        title: "{{ title }}"
+        content: "{{ description }}"
+        section: "{{ category }}"
+        url: "/features/{{ id }}"
+        type: "feature"
+      searchableAttributes: [title, content]
+      filterableAttributes: [section, type]

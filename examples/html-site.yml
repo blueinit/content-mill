@@ -1,0 +1,27 @@
+# Index a directory of static HTML pages into Meilisearch.
+# Scripts, styles, nav, header, and footer are stripped automatically.
+#
+# Usage:
+#   MEILI_MASTER_KEY=your-key npx content-mill index --config examples/html-site.yml --dry-run
+
+meili:
+  host: http://localhost:7700
+  apiKey: ${MEILI_MASTER_KEY}
+
+sources:
+  - name: site
+    type: html
+    path: ./public/              # directory of .html files (recursive)
+    index: site_pages
+    document:
+      primaryKey: id
+      fields:
+        id: "{{ slug }}"
+        title: "{{ heading }}"
+        content: "{{ body }}"
+        excerpt: "{{ body | truncate(200) }}"
+        url: "{{ path }}"
+        type: "page"
+      searchableAttributes: [title, content]
+      filterableAttributes: [type]
+      displayedAttributes: [title, excerpt, url, type]

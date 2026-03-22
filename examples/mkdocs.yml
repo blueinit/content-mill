@@ -1,0 +1,30 @@
+# Index a MkDocs documentation site into Meilisearch.
+#
+# Usage:
+#   MEILI_MASTER_KEY=your-key npx content-mill index --config examples/mkdocs.yml --dry-run
+
+meili:
+  host: http://localhost:7700
+  apiKey: ${MEILI_MASTER_KEY}
+
+sources:
+  - name: docs
+    type: mkdocs
+    config: ./mkdocs.yml         # path to your mkdocs.yml
+    index: docs
+    chunking:
+      strategy: heading          # split each page by h2 headings
+      level: 2
+    document:
+      primaryKey: id
+      fields:
+        id: "{{ slug }}-{{ chunk_index }}"
+        title: "{{ chunk_heading }}"
+        content: "{{ chunk_body }}"
+        page_title: "{{ heading }}"
+        section: "{{ nav_section }}"
+        url: "{{ path }}#{{ chunk_heading | slugify }}"
+        type: "docs"
+      searchableAttributes: [title, content, page_title]
+      filterableAttributes: [section, type]
+      sortableAttributes: [title]
